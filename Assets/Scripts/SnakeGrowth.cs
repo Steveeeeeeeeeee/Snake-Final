@@ -28,13 +28,7 @@ public class SnakeGrowth : MonoBehaviour
         moveSegments();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Food")
-        {
-            grow();
-        }
-    } 
+
 
      void resetSegments(){
         for (int i = 1; i < segments.Count; i++)

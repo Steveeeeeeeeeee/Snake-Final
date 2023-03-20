@@ -44,37 +44,29 @@ public class Player : MonoBehaviour
         transform.position = new Vector2(x, y);     
     }
     void getUserInput() {
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && direction != Vector2.left)
         {
             direction = Vector2.right;
             transform.rotation = Quaternion.Euler(0, 0, -90);
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && direction != Vector2.right)
         {
             direction = Vector2.left;
             transform.rotation = Quaternion.Euler(0, 0, 90);
         }
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) && direction != Vector2.down)
         {
             direction = Vector2.up;
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-        if (Input.GetKey(KeyCode.S))
+    
+        if (Input.GetKey(KeyCode.S) && direction != Vector2.up)
         {
             direction = Vector2.down;
             transform.rotation = Quaternion.Euler(0, 0, 180);
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Walls")
-        {
-            Time.timeScale = 0;
-            Debug.Log("Game Over");
-        }
-    
-    }   
 
    
   
