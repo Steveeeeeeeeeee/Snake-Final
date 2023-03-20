@@ -30,6 +30,7 @@ public class Collisions : MonoBehaviour
         {
             Time.timeScale = 0;
             Debug.Log("Game Over");
+          
         }
     
     }  

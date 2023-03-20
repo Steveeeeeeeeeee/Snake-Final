@@ -17,6 +17,15 @@ public class MoveInvoker
         command.Execute();
         _commandList.Push(command);
     }
+
+    public void undoCommand()
+    {
+        if (_commandList.Count > 0)
+        {
+            ICommand LatestCommand = _commandList.Pop();
+            LatestCommand.Undo();
+        }
+    }
 }
  
 

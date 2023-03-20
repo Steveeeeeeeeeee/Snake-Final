@@ -38,9 +38,7 @@ public class Player : MonoBehaviour
     }
 
     void moveSnake() {
-        float x = transform.position.x + direction.x;
-        float y = transform.position.y + direction.y;
-        transform.position = new Vector2(x, y);     
+        _moveInvoker.addCommand(new MovementCommand(this));   
     }
     void getUserInput() {
         if (Input.GetKey(KeyCode.D) && direction != Vector2.left)
@@ -64,6 +62,10 @@ public class Player : MonoBehaviour
               ICommand StoredCommand = new MoveSCommand(this);
             _moveInvoker.addCommand(StoredCommand);
         }
+        if (Input.GetKey(KeyCode.Z))
+        {
+            _moveInvoker.undoCommand();
+        }   
     }
 
 
