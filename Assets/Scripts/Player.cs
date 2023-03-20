@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    Vector2 direction = Vector2.right;
+    public Vector2 direction = Vector2.right;
     // Start is called before the first frame update
     
 
@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
         transform.position = new Vector2(0.5f, 0.5f);
         transform.rotation = Quaternion.Euler(0, 0, -90);
         direction = Vector2.right;
-        Time.timeScale = 0.2f;
+        Time.timeScale = 0.1f;
     }
 
     // Update is called once per frame
@@ -46,24 +46,24 @@ public class Player : MonoBehaviour
     void getUserInput() {
         if (Input.GetKey(KeyCode.D) && direction != Vector2.left)
         {
-            direction = Vector2.right;
-            transform.rotation = Quaternion.Euler(0, 0, -90);
+             ICommand StoredCommand = new MoveDCommand(this);
+            StoredCommand.Execute();
         }
         if (Input.GetKey(KeyCode.A) && direction != Vector2.right)
         {
-            direction = Vector2.left;
-            transform.rotation = Quaternion.Euler(0, 0, 90);
+              ICommand StoredCommand = new MoveACommand(this);
+            StoredCommand.Execute();
         }
         if (Input.GetKey(KeyCode.W) && direction != Vector2.down)
         {
-            direction = Vector2.up;
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+          ICommand StoredCommand = new MoveWCommand(this);
+            StoredCommand.Execute();
+        
         }
-    
         if (Input.GetKey(KeyCode.S) && direction != Vector2.up)
         {
-            direction = Vector2.down;
-            transform.rotation = Quaternion.Euler(0, 0, 180);
+              ICommand StoredCommand = new MoveSCommand(this);
+            StoredCommand.Execute();
         }
     }
 
