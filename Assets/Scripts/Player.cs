@@ -34,36 +34,37 @@ public class Player : MonoBehaviour
     void FixedUpdate() 
     {
      moveSnake();
-        
+    
     }
 
     void moveSnake() {
         _moveInvoker.addCommand(new MovementCommand(this));   
     }
     void getUserInput() {
-        if (Input.GetKey(KeyCode.D) && direction != Vector2.left)
+        if (Input.GetKeyDown(KeyCode.D) && direction != Vector2.left)
         {
              ICommand StoredCommand = new MoveDCommand(this);
             _moveInvoker.addCommand(StoredCommand);
         }
-        if (Input.GetKey(KeyCode.A) && direction != Vector2.right)
+        if (Input.GetKeyDown(KeyCode.A) && direction != Vector2.right)
         {
               ICommand StoredCommand = new MoveACommand(this);
             _moveInvoker.addCommand(StoredCommand);
         }
-        if (Input.GetKey(KeyCode.W) && direction != Vector2.down)
+        if (Input.GetKeyDown(KeyCode.W) && direction != Vector2.down)
         {
           ICommand StoredCommand = new MoveWCommand(this);
             _moveInvoker.addCommand(StoredCommand);
         
         }
-        if (Input.GetKey(KeyCode.S) && direction != Vector2.up)
+        if (Input.GetKeyDown(KeyCode.S) && direction != Vector2.up)
         {
               ICommand StoredCommand = new MoveSCommand(this);
             _moveInvoker.addCommand(StoredCommand);
         }
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
+           
             _moveInvoker.undoCommand();
         }   
     }

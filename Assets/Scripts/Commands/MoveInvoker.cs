@@ -15,6 +15,7 @@ public class MoveInvoker
     public void addCommand(ICommand command)
     {
         command.Execute();
+        Debug.Log(command + " was executed" );
         _commandList.Push(command);
     }
 
@@ -24,6 +25,7 @@ public class MoveInvoker
         {
             ICommand LatestCommand = _commandList.Pop();
             LatestCommand.Undo();
+            Debug.Log(LatestCommand + " was undone");  
         }
     }
 }

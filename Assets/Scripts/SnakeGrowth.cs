@@ -8,24 +8,27 @@ public class SnakeGrowth : MonoBehaviour
 
     
 {
+    MoveInvoker _moveInvoker;
 
     public GameObject segment;
-    List <GameObject> segments = new List<GameObject>();
+    public List <GameObject> segments = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
+        _moveInvoker = new MoveInvoker();  
         resetSegments();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        getUserInput();
     }
 
     void FixedUpdate()
     {
         moveSegments();
+       
     }
 
 
@@ -56,10 +59,17 @@ public class SnakeGrowth : MonoBehaviour
     }  
     
       private void moveSegments(){
-        for (int i = segments.Count - 1; i > 0; i--)
-        {
-            segments[i].transform.position = segments[i - 1].transform.position;
-        }
+       _moveInvoker.addCommand(new TailCommand(this)); 
          
+         
+    }
+
+    private void getUserInput(){
+
+        if (Input.GetKeyDown(KeyCode.Z))
+         {
+           
+             _moveInvoker.undoCommand();
+         }
     }
 }
