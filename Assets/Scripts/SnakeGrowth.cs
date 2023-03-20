@@ -15,8 +15,9 @@ public class SnakeGrowth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _moveInvoker = new MoveInvoker();  
         resetSegments();
+        _moveInvoker = new MoveInvoker();  
+        
     }
 
     // Update is called once per frame
