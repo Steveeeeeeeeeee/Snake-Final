@@ -4,81 +4,78 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+    Vector2 direction = Vector2.right;
     // Start is called before the first frame update
-    private Vector2 gridMoveDirection;
-    private Vector2 gridPosition;
-    private float gridMoveTimer;
-    private float gridMoveTimerMax; 
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        gridMoveTimerMax = 0.2f;
-        gridMoveTimer = gridMoveTimerMax;
-        gridMoveDirection = Vector2.right;
-        gridPosition = new Vector2(0,0);
         
+        reset();
+        
+    }
+
+    void reset() {
+        transform.position = new Vector2(0.5f, 0.5f);
+        transform.rotation = Quaternion.Euler(0, 0, -90);
+        direction = Vector2.right;
+        Time.timeScale = 0.2f;
     }
 
     // Update is called once per frame
     void Update()
     {
-      HandleMovement(); 
-      HandleGridMovement();
-         
+      getUserInput();
+   
         
     }
 
-    private void HandleMovement(){
-         if (Input.GetKeyDown(KeyCode.W))
-        {
-            if (gridMoveDirection.y != -1)
-            {
-                gridMoveDirection = Vector2.up;
-            }
-        }   
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            if (gridMoveDirection.y != 1)
-            {
-                gridMoveDirection = Vector2.down;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            if (gridMoveDirection.x != 1)
-            {
-                gridMoveDirection = Vector2.left;
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            if (gridMoveDirection.x != -1)
-            {
-                gridMoveDirection = Vector2.right;
-            }   
-        }
-    }
-
-    private void HandleGridMovement()
+    void FixedUpdate() 
     {
-       gridMoveTimer += Time.deltaTime;
-       if (gridMoveTimer >=gridMoveTimerMax){
-            gridPosition +=gridMoveDirection;
-            gridMoveTimer -= gridMoveTimerMax;
-       }
-       //transform player so that they only occupy one
-       transform.position = new Vector3(gridPosition.x, gridPosition.y );
-
+     moveSnake();
+        
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void moveSnake() {
+        float x = transform.position.x + direction.x;
+        float y = transform.position.y + direction.y;
+        transform.position = new Vector2(x, y);     
+    }
+    void getUserInput() {
+        if (Input.GetKey(KeyCode.D))
+        {
+            direction = Vector2.right;
+            transform.rotation = Quaternion.Euler(0, 0, -90);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            direction = Vector2.left;
+            transform.rotation = Quaternion.Euler(0, 0, 90);
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            direction = Vector2.up;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            direction = Vector2.down;
+            transform.rotation = Quaternion.Euler(0, 0, 180);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Walls")
         {
             Time.timeScale = 0;
             Debug.Log("Game Over");
         }
+    
     }   
+
+   
   
 }
