@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     }
 
     void reset() {
-        transform.position = new Vector2(1.5f, 1.5f);
+        transform.position = new Vector2(0.5f, 0.5f);
         transform.rotation = Quaternion.Euler(0, 0, -90);
         direction = Vector2.right;
         Time.timeScale = 0.1f;
@@ -64,6 +64,9 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
+           
+            _moveInvoker.undoCommand();
+            _moveInvoker.undoCommand();
             _moveInvoker.undoCommand();
         }   
     }

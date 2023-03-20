@@ -70,7 +70,9 @@ public class SnakeGrowth : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
          {
            
-             _moveInvoker.undoCommand();
+            _moveInvoker.undoCommand();
+            _moveInvoker.undoCommand();
+            _moveInvoker.undoCommand();
          }
     }
 }
