@@ -6,13 +6,12 @@ public class Player : MonoBehaviour
 {
 
     public Vector2 direction = Vector2.right;
-    // Start is called before the first frame update
-    
-
-    // Start is called before the first frame update
+   
+    MoveInvoker _moveInvoker;
     void Start()
     {
         
+        _moveInvoker = new MoveInvoker();       
         reset();
         
     }
@@ -47,23 +46,23 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.D) && direction != Vector2.left)
         {
              ICommand StoredCommand = new MoveDCommand(this);
-            StoredCommand.Execute();
+            _moveInvoker.addCommand(StoredCommand);
         }
         if (Input.GetKey(KeyCode.A) && direction != Vector2.right)
         {
               ICommand StoredCommand = new MoveACommand(this);
-            StoredCommand.Execute();
+            _moveInvoker.addCommand(StoredCommand);
         }
         if (Input.GetKey(KeyCode.W) && direction != Vector2.down)
         {
           ICommand StoredCommand = new MoveWCommand(this);
-            StoredCommand.Execute();
+            _moveInvoker.addCommand(StoredCommand);
         
         }
         if (Input.GetKey(KeyCode.S) && direction != Vector2.up)
         {
               ICommand StoredCommand = new MoveSCommand(this);
-            StoredCommand.Execute();
+            _moveInvoker.addCommand(StoredCommand);
         }
     }
 
