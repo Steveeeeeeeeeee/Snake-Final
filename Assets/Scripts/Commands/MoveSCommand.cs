@@ -23,7 +23,7 @@ public class MoveSCommand : ICommand
     public void Execute()
     {
         snake.direction = Vector2.down;
-        snake.transform.rotation = Quaternion.Euler(0, 0, 180);
+        snake.transform.rotation = Quaternion.Euler(0, 0, -90);
       
     }
 

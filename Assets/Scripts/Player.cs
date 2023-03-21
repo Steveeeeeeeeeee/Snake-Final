@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     void reset() {
         transform.position = new Vector2(0.5f, 0.5f);
-        transform.rotation = Quaternion.Euler(0, 0, -90);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
         direction = Vector2.right;
         Time.timeScale = 0.1f;
     }
