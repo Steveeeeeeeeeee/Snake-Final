@@ -24,7 +24,9 @@ public class TailCommand : ICommand
          for (int i = segments.Count - 1; i > 0; i--)
         {
             segments[i].transform.position = segments[i - 1].transform.position;
+
         }
+        tail.LastPos = segments[segments.Count -1].transform.position;
     }
 
     public void Undo()

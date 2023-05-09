@@ -8,38 +8,48 @@ public class SnakeGrowth : MonoBehaviour
 
     
 {
-    MoveInvoker _moveInvoker;
+    Invoker _Invoker;
 
     public GameObject segment;
+    
     public List <GameObject> segments = new List<GameObject>();
 
-    public Sprite[] spriteArray;
+    public Sprite[] spriteArray; 
+
+    public Vector2 LastPos;
+
+    public int growFlag = 0;   
+
+    public int score = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
+        
         resetSegments();
-        _moveInvoker = new MoveInvoker();  
+        _Invoker = new Invoker();  
+        LastPos = segments[segments.Count -1].transform.position + Vector3.left;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        getUserInput();
-        changeSprite(); 
+        
+        changeSprite();
+        
     }
 
     void FixedUpdate()
     {
-       
         moveSegments();
-        
+        grow();
        
     }
 
 
 
-     void resetSegments(){
+     public void resetSegments(){
         for (int i = 1; i < segments.Count; i++)
         {
             Destroy(segments[i].gameObject);
@@ -47,9 +57,10 @@ public class SnakeGrowth : MonoBehaviour
         segments.Clear();
         segments.Add(gameObject);  
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 3; i++)
         {
-          grow();
+          growFlag += 1;
+        
         }
 
     }
@@ -57,31 +68,30 @@ public class SnakeGrowth : MonoBehaviour
     
 
     public void grow(){
-        
-
-        GameObject newSegment = Instantiate(segment);
-        newSegment.transform.position = segments[segments.Count - 1].transform.position;
-        segments.Add(newSegment);
+        if (growFlag > 0)
+        {
+            GameObject newSegment = Instantiate(segment);
+            newSegment.transform.position = LastPos;
+            segments.Add(newSegment);
+            score += 1;
+            growFlag -= 1;
+        }
     }  
     
       private void moveSegments(){
-       _moveInvoker.addCommand(new TailCommand(this)); 
+       _Invoker.addCommand(new TailCommand(this)); 
          
          
     }
 
-    private void getUserInput(){
-
-        if (Input.GetKeyDown(KeyCode.Z))
-         {
+    public void Rewind(){
            
-            _moveInvoker.undoCommand();
-            _moveInvoker.undoCommand();
-            _moveInvoker.undoCommand();
-         }
+            _Invoker.undoCommand();
+            _Invoker.undoCommand();
+            _Invoker.undoCommand();
+         
     }
-
-    public void changeSprite(){
+     public void changeSprite(){
         
         for (int i = 1; i < segments.Count -1; i++)
         {
@@ -138,6 +148,7 @@ public class SnakeGrowth : MonoBehaviour
            }
 
         }
+        if(segments.Count > 1){
         segments[segments.Count - 1].GetComponent<SpriteRenderer>().sprite = spriteArray[0];    
         Vector2 previousPieceDirection = segments[segments.Count -2].transform.position - segments[segments.Count -1].transform.position;
         if (previousPieceDirection  == Vector2.up){
@@ -152,6 +163,9 @@ public class SnakeGrowth : MonoBehaviour
         else if (previousPieceDirection  == Vector2.left){
             segments[segments.Count - 1].transform.rotation = Quaternion.Euler(0, 0, 180);
         }
+        }
 
     }
+
+    
 }
