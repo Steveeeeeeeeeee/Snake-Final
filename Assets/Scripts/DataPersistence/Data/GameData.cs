@@ -9,6 +9,8 @@ public class GameData
 {
     public int MaxLevel;
 
+    
+
 
     public GameData()
     {

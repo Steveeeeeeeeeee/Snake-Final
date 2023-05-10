@@ -10,10 +10,13 @@ public class MainMenu : MonoBehaviour
 
     public static int firstLevel = 1;
     public static int levelPlayed = 1;
-    public static int selectedPlayer = 1;
+    public static int selectedPlayer;
     // Start is called before the first frame update
 
-
+   public void Start()
+    {
+       
+    }
     
     public void PlayLevel1()
     {
@@ -45,7 +48,7 @@ public class MainMenu : MonoBehaviour
     {
         //depending on which player button is pressed load the corresponding player
         selectedPlayer = playerNumber;
-        Debug.Log("Player " + selectedPlayer + " selected");
+        
 
 
     }
@@ -61,6 +64,7 @@ public class MainMenu : MonoBehaviour
     {
 
         SceneManager.LoadScene("MainMenu");
+        DataPersistenceManager.Instance.SaveGame();
     }
 
     public void LoadPlayerScreen()
@@ -77,4 +81,6 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
+    
 }

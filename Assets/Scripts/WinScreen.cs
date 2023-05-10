@@ -9,7 +9,6 @@ public class WinScreen : MonoBehaviour
 {
 
     public TMP_Text pointsText;
-    private static int Max = 1;
     public static int SaveMax = 1;
 
 
@@ -17,21 +16,21 @@ public class WinScreen : MonoBehaviour
     public void Setup(int score)
     {
 
-
+        Debug.Log("Save Max: " + SaveMax); 
         gameObject.SetActive(true);
         pointsText.text = "Score: " + score.ToString();
 
-        if (MainMenu.levelPlayed == Max)
+        if (MainMenu.levelPlayed == SaveMax)
         {
 
-            MainMenu.levelPlayed += 1;
+            MainMenu.levelPlayed = SaveMax + 1;
 
-            Max += 1;
+            SaveMax += 1;
             
             
             
         }
-        SaveMax = Max;
+        
         DataPersistenceManager.Instance.SaveGame();
 
     }
@@ -48,6 +47,7 @@ public class WinScreen : MonoBehaviour
     public void MainMenuButton()
     {
         SceneManager.LoadScene("PlayerScene");
+        DataPersistenceManager.Instance.SaveGame();
     }
 
  

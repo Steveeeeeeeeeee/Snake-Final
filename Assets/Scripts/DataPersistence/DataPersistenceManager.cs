@@ -5,11 +5,16 @@ using System.Linq;
 
 public class DataPersistenceManager : MonoBehaviour
 {
+    [Header("File Storage COnfiguration")]
+    [SerializeField] private string fileName;
+
     private GameData gameData;
     public static DataPersistenceManager Instance { get; private set; }
 
     private List <IDataPersistence> dataPersistenceObjects;
+    private FileDataHandler dataHandler;
 
+    private string selectedProfileID = "";
 
     private void Awake()
     {
@@ -23,7 +28,10 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void Start()
     {
+        
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
+        selectedProfileID = "Player" + MainMenu.selectedPlayer;
         LoadGame();
     }
 
@@ -36,7 +44,8 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void LoadGame()
     {
-
+        
+        this.gameData = this.dataHandler.Load(selectedProfileID);
 
         if (this.gameData == null)
         {
@@ -50,6 +59,7 @@ public class DataPersistenceManager : MonoBehaviour
         }   
 
         Debug.Log("Loaded Max level is " + this.gameData.MaxLevel);
+        
     }
 
     public void SaveGame()
@@ -59,6 +69,10 @@ public class DataPersistenceManager : MonoBehaviour
             dataPersistenceObject.SaveData(ref gameData);
         }
         Debug.Log("Saved Max level is " + this.gameData.MaxLevel);
+        
+
+
+        dataHandler.Save(gameData, selectedProfileID);
     }
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()
@@ -70,7 +84,12 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        //SaveGame();
+        SaveGame();
     }
+
+    public Dictionary<string, GameData> GetAllProfilesGameData()
+    {
+        return dataHandler.LoadAllProfiles();
+    }   
 
 }

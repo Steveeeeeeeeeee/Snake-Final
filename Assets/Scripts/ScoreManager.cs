@@ -46,19 +46,19 @@ public class ScoreManager : MonoBehaviour
         switch (level){
         
             case "Level1":
-                winScore = 1;
+                winScore = 5;
                 break;
             case "Level2":
-                winScore = 1;
+                winScore = 10;
                 break;
             case "Level3":
-                winScore = 1;
+                winScore = 15;
                 break;    
             case "Level4":
-                winScore = 1;
+                winScore = 20;
                 break;
             case "Level5":
-                winScore = 1;
+                winScore = 30;
                 break;
             default:
             Debug.LogError("Invalid Level");

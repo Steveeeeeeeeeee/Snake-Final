@@ -25,6 +25,8 @@ public class GameOverScreen : MonoBehaviour
 
     public void MainMenuButton(){
         SceneManager.LoadScene("PlayerScene");
+
+        DataPersistenceManager.Instance.SaveGame();
     }
 
    

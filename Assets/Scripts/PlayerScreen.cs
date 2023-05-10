@@ -12,15 +12,25 @@ public class PlayerScreen : MonoBehaviour, IDataPersistence
 
     public GameObject[] Levels;
 
+   
+
     public static int selectedPlayer;
     
     // Start is called before the first frame update
+
+    void Start()
+    {
+         ActivatedLevels();
+    }
     void Awake()
     {
         selectedPlayer = MainMenu.selectedPlayer;
+        Debug.Log("Player " + selectedPlayer + " selected");
         Debug.Log("Max level: " + WinScreen.SaveMax);       
         UpdateText();
-        ActivatedLevels();
+        
+        
+
         
         
     }
@@ -54,11 +64,16 @@ public class PlayerScreen : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
+    
         WinScreen.SaveMax = data.MaxLevel;
+
+
+        Debug.Log("Max level: " + WinScreen.SaveMax + "OR" + data.MaxLevel);
     }
 
     public void SaveData(ref GameData data)
     {
+       
         data.MaxLevel = WinScreen.SaveMax;
     }
 }
