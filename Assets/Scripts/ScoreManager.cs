@@ -46,13 +46,13 @@ public class ScoreManager : MonoBehaviour
         switch (level){
         
             case "Level1":
-                winScore = 5;
+                winScore = 1;
                 break;
             case "Level2":
-                winScore = 10;
+                winScore = 1;
                 break;
             case "Level3":
-                winScore = 15;
+                winScore = 1;
                 break;    
             case "Level4":
                 winScore = 20;

@@ -19,6 +19,8 @@ public class WinScreen : MonoBehaviour
         Debug.Log("Save Max: " + SaveMax); 
         gameObject.SetActive(true);
         pointsText.text = "Score: " + score.ToString();
+       
+        
 
         if (MainMenu.levelPlayed == SaveMax)
         {
@@ -50,6 +52,5 @@ public class WinScreen : MonoBehaviour
         DataPersistenceManager.Instance.SaveGame();
     }
 
- 
-
+  
 }

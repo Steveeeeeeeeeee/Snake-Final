@@ -73,6 +73,12 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("PlayerScene");
     }
 
+    public void LoadAchievementsScreen()
+    {
+
+        SceneManager.LoadScene("AchievementsScene");
+    }   
+
 
 
 

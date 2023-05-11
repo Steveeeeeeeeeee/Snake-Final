@@ -4,11 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Collisions : MonoBehaviour
+
+
 {
+
+    public static int blueEaten;
     // Start is called before the first frame update
     void Start()
     {
-      
+      blueEaten = 1;
     }
 
     // Update is called once per frame
@@ -39,6 +43,7 @@ public class Collisions : MonoBehaviour
           
         }
          if (collision.gameObject.tag == "BlueFood") {
+            blueEaten = 0;
             GetComponent<SnakeGrowth>().growFlag += 1; 
             ScoreManager.Instance.UpdateScore(2); 
              if(ScoreManager.Instance.score >= ScoreManager.Instance.GetWinScore(SceneManager.GetActiveScene().name)){

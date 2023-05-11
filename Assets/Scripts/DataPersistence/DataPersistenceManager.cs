@@ -22,7 +22,7 @@ public class DataPersistenceManager : MonoBehaviour
         {
             Debug.LogError("There should never be two data persistence managers.");
         }
-
+        
         Instance = this;
     }
 
@@ -59,6 +59,7 @@ public class DataPersistenceManager : MonoBehaviour
         }   
 
         Debug.Log("Loaded Max level is " + this.gameData.MaxLevel);
+        Debug.Log("Loaded achievements are " + this.gameData.achievements);
         
     }
 
@@ -69,7 +70,7 @@ public class DataPersistenceManager : MonoBehaviour
             dataPersistenceObject.SaveData(ref gameData);
         }
         Debug.Log("Saved Max level is " + this.gameData.MaxLevel);
-        
+        Debug.Log("saved achievements are " + this.gameData.achievements);
 
 
         dataHandler.Save(gameData, selectedProfileID);

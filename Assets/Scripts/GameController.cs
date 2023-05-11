@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour
 
     public void Win(){
         Time.timeScale = 0;
-
+        
         WinScreen.Setup(ScoreManager.Instance.score);
     }
 
